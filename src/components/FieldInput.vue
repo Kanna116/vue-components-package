@@ -1,0 +1,163 @@
+<template>
+  <div class="custom-input" :style="{ width: expand ? '100%' : '200px' }">
+    <label class="custom-label" :for="label"
+      >{{ label }} <span v-if="required">*</span></label
+    >
+    <input
+      class="custom-input-field"
+      :type="inputType"
+      :name="label"
+      :id="label"
+      :placeholder="placeholder"
+      v-model="inputVal"
+      @input="validate"
+      @blur="validate"
+      :required="required"
+      :aria-required="required"
+    />
+    <p v-if="msg" aria-live="polite" class="error-msg">{{ msg }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed, defineProps, defineEmits } from "vue";
+
+const msg = ref("");
+const emit = defineEmits(["input"]);
+const props = defineProps({
+  type: {
+    type: String,
+    required: true,
+    validator(type) {
+      return ["username", "password", "email"].includes(type);
+    },
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+  },
+  required: {
+    type: Boolean,
+  },
+  expand: {
+    type: Boolean,
+  },
+});
+
+const inputVal = ref("");
+const inputType = computed(() => {
+  return props.type === "password" ? "password" : "text";
+});
+
+const validate = () => {
+  switch (props.type) {
+    case "password":
+      msg.value = validatePassword(inputVal.value);
+      break;
+    case "username":
+      msg.value = validateUsername(inputVal.value);
+      break;
+    case "email":
+      msg.value = validateEmail(inputVal.value);
+      break;
+    default:
+      break;
+  }
+
+  emit("input", inputVal.value);
+};
+
+const validateUsername = (value) => {
+  value = value.trim();
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+  if (!value) {
+    return "Please enter your username";
+  }
+  if (value.length < 3) {
+    return "The username must be above 3 characters";
+  }
+  if (value.includes(" ")) {
+    return "User Name is not allowed to have spaces";
+  }
+  if (hasSpecialChar) {
+    return "Other than _ no special characters are allowed";
+  }
+  return "";
+};
+const validatePassword = (value) => {
+  if (!value) {
+    return "Password is required";
+  }
+  const minLength = 8;
+  if (value.length < minLength) {
+    return "Please enter atleast 8 characters";
+  }
+  const hasUpperCase = /[A-Z]/.test(value);
+  const hasLowerCase = /[a-z]/.test(value);
+  const hasNumber = /[0-9]/.test(value);
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+  if (!hasUpperCase) {
+    return "Enter atleast 1 uppercase";
+  }
+  if (!hasLowerCase) {
+    return "Enter atleast 1 lowercase";
+  }
+  if (!hasNumber) {
+    return "Enter atleast 1 number";
+  }
+  if (!hasSpecialChar) {
+    return "Enter atleast 1 special character";
+  }
+  return "";
+};
+
+const validateEmail = (value) => {
+  const regexPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+  if (!value) {
+    return "Please enter your email";
+  }
+  if (!regexPattern.test(value)) {
+    return "Please enter a valid email ex: klaxe7@gmail.com";
+  }
+  return "";
+};
+</script>
+
+<style scoped>
+.custom-input {
+  width: 100%;
+  height: fit-content;
+  min-width: 200px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 5px;
+}
+.custom-label {
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 500;
+}
+.custom-input-field {
+  height: 40px;
+  width: 100%;
+  min-width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0.5px solid #d2d6db;
+}
+.custom-input-field:focus {
+  border: 2px solid #424242;
+  outline: 0px;
+}
+.error-msg {
+  font-size: 12px;
+  font-weight: 600;
+  color: red;
+}
+</style>
