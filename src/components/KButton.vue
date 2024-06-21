@@ -37,9 +37,10 @@ defineProps({
   border: 0px;
   color: white;
   gap: 8px;
-  display: flex;
   align-items: center;
   justify-content: center;
+  display: inline-flex;
+  text-wrap: nowrap;
 }
 .default {
   background-color: white;
@@ -81,12 +82,17 @@ defineProps({
 }
 
 .medium {
-  padding: 10px 24px;
-  font-size: 14px;
+  /* padding: 10px 24px; */
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;;
 }
 .small {
-  padding: 8px 18px;
-  font-size: 14px;
+  /* padding: 8px 18px; */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 .large {
   padding: 12px 32px;
