@@ -81,8 +81,8 @@ td,th
 
 }
 /* add this to tbody element to have striped rows */
-.striped tr:nth-child(odd) {
-  background-color: #e7e9eb;
+.striped tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 /* add this class to table element to have rounded table  */
