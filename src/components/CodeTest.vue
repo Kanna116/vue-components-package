@@ -1,11 +1,13 @@
 <template>
   <!-- <h1>Test</h1> -->
   <KSearchInput
-  placeholder="Seach employee by id"
-  label="Employee search" 
-  @input="handleSearch" 
-  rounded 
-  :expand="false"/>
+    placeholder="Seach employee by id"
+    label="Employee search"
+    @input="handleSearch"
+    rounded
+    iconed
+    :expand="false"
+  />
   {{ inputVal }}
   <FieldInput
     type="username"
@@ -15,7 +17,7 @@
     required
     rounded
   />
-  
+
   <div class="btns-container-table">
     <h1>Sizes and edges</h1>
     <p>small</p>

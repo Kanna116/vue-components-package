@@ -7,15 +7,15 @@
       class="custom-input-field"
       :style="{
         borderRadius: rounded ? '50px' : '5px',
-        padding: rounded && type != 'search' ? '10px' : '',
+        padding: rounded && !iconed ? '10px' : '',
       }"
     >
-      <span v-if="type === 'search'" class="icon-first">
+      <span v-if="iconed" class="icon-first">
         <slot name="icon">icon</slot>
       </span>
       <input
         class="regular-input"
-        :class="type == 'search' ? 'search-input' : ''"
+        :class="type == 'search' && iconed ? 'search-input' : ''"
         :type="inputType"
         :name="label"
         :id="label"
@@ -59,11 +59,18 @@ const props = defineProps({
   rounded: {
     type: Boolean,
   },
+  iconed: {
+    type: Boolean,
+  },
 });
 
 const inputVal = ref("");
 const inputType = computed(() => {
-  return props.type === "password" ? "password" : "text";
+  return props.type === "password"
+    ? "password"
+    : props.type == "search"
+    ? "search"
+    : "text";
 });
 
 const validate = () => {
