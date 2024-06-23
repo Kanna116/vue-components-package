@@ -1,5 +1,8 @@
 <template>
   <!-- <h1>Test</h1> -->
+  <KDataList :items="cities" @input="handleInput"/>
+  values is {{ inputVal }}
+
   <KSearchInput
     placeholder="Seach employee by id"
     label="Employee search"
@@ -8,7 +11,7 @@
     iconed
     :expand="false"
   />
-  {{ inputVal }}
+  <!-- {{ inputVal }} -->
   <FieldInput
     type="username"
     label="User Name"
@@ -116,6 +119,11 @@ import FieldInput from "./FieldInput.vue";
 import KButton from "./KButton.vue";
 import KTable from "./KTable.vue";
 const columns = ["Order Id", "Customer Name", "Product Name"];
+
+import KDataList from "./KDataList.vue";
+const cities = ref(["India", "USA", "Africa", "Korea", "Japan"]);
+// const inputVal = ref('')
+
 const data = ref([
   {
     order_id: "SO123456",
@@ -215,8 +223,8 @@ const handleSearch = (res) => {
   inputVal.value = res;
 };
 const handleInput = (res) => {
-  // inputVal.value = res;
-  console.log(res);
+  inputVal.value = res;
+  // console.log(res);
 };
 </script>
 

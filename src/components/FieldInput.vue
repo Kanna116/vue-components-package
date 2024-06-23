@@ -1,8 +1,9 @@
+<!-- InputComponent.vue -->
 <template>
   <div class="custom-input" :style="{ width: expand ? '100%' : '200px' }">
-    <label v-if="label" class="custom-label" :for="label"
-      >{{ label }} <span v-if="required">*</span></label
-    >
+    <label v-if="label" class="custom-label" :for="label">
+      {{ label }} <span v-if="required">*</span>
+    </label>
     <div
       class="custom-input-field"
       :style="{
@@ -32,7 +33,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits } from "vue";
+import { ref, computed, watch, defineProps, defineEmits } from "vue";
 
 const msg = ref("");
 const emit = defineEmits(["input"]);
@@ -62,13 +63,17 @@ const props = defineProps({
   iconed: {
     type: Boolean,
   },
+  modelValue: {
+    type: String,
+    default: ""
+  }
 });
 
-const inputVal = ref("");
+const inputVal = ref(props.modelValue);
 const inputType = computed(() => {
   return props.type === "password"
     ? "password"
-    : props.type == "search"
+    : props.type === "search"
     ? "search"
     : "text";
 });
@@ -108,13 +113,14 @@ const validateUsername = (value) => {
   }
   return "";
 };
+
 const validatePassword = (value) => {
   if (!value) {
     return "Password is required";
   }
   const minLength = 8;
   if (value.length < minLength) {
-    return "Please enter atleast 8 characters";
+    return "Please enter at least 8 characters";
   }
   const hasUpperCase = /[A-Z]/.test(value);
   const hasLowerCase = /[a-z]/.test(value);
@@ -122,16 +128,16 @@ const validatePassword = (value) => {
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
   if (!hasUpperCase) {
-    return "Enter atleast 1 uppercase";
+    return "Enter at least 1 uppercase";
   }
   if (!hasLowerCase) {
-    return "Enter atleast 1 lowercase";
+    return "Enter at least 1 lowercase";
   }
   if (!hasNumber) {
-    return "Enter atleast 1 number";
+    return "Enter at least 1 number";
   }
   if (!hasSpecialChar) {
-    return "Enter atleast 1 special character";
+    return "Enter at least 1 special character";
   }
   return "";
 };
@@ -147,6 +153,10 @@ const validateEmail = (value) => {
   }
   return "";
 };
+
+watch(() => props.modelValue, (newValue) => {
+  inputVal.value = newValue;
+});
 </script>
 
 <style scoped>

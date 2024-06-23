@@ -4,6 +4,7 @@
     :placeholder="placeholder ? placeholder : 'Search..'"
     :label="label"
     @input="handleInput"
+    v-model="searchTerm"
     :rounded="rounded"
     :expand="expand"
     :iconed="iconed"
@@ -19,8 +20,8 @@
 </template>
 <script setup>
 import FieldInput from "./FieldInput.vue";
-import { defineEmits, defineProps } from "vue";
-defineProps({
+import { defineEmits, defineProps,watch,ref } from "vue";
+const props = defineProps({
   rounded: {
     type: Boolean,
   },
@@ -36,9 +37,20 @@ defineProps({
   iconed: {
     type: Boolean,
   },
+  modelValue: {
+    type: String,
+    default: ""
+  }
 });
+
+const searchTerm = ref(props.modelValue);
 const emit = defineEmits(["input"]);
 const handleInput = (res) => {
+  searchTerm.value = res;
   emit("input", res);
 };
+watch(() => props.modelValue, (newValue) => {
+  searchTerm.value = newValue;
+});
+
 </script>
