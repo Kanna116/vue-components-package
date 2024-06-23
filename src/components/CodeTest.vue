@@ -1,12 +1,21 @@
 <template>
+  <!-- <h1>Test</h1> -->
+  <KSearchInput
+  placeholder="Seach employee by id"
+  label="Employee search" 
+  @input="handleSearch" 
+  rounded 
+  :expand="false"/>
+  {{ inputVal }}
   <FieldInput
     type="username"
     label="User Name"
     placeholder="Please enter your user name"
     @input="handleInput"
     required
+    rounded
   />
-
+  
   <div class="btns-container-table">
     <h1>Sizes and edges</h1>
     <p>small</p>
@@ -99,10 +108,11 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+import KSearchInput from "./KSearchInput.vue";
 import FieldInput from "./FieldInput.vue";
 import KButton from "./KButton.vue";
 import KTable from "./KTable.vue";
-import { ref } from "vue";
 const columns = ["Order Id", "Customer Name", "Product Name"];
 const data = ref([
   {
@@ -197,6 +207,15 @@ const data = ref([
   },
 ]);
 const fields = ["order_id", "customer_name", "product_name"];
+
+const inputVal = ref("");
+const handleSearch = (res) => {
+  inputVal.value = res;
+};
+const handleInput = (res) => {
+  // inputVal.value = res;
+  console.log(res);
+};
 </script>
 
 <style scoped>

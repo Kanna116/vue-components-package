@@ -1,20 +1,32 @@
 <template>
   <div class="custom-input" :style="{ width: expand ? '100%' : '200px' }">
-    <label class="custom-label" :for="label"
+    <label v-if="label" class="custom-label" :for="label"
       >{{ label }} <span v-if="required">*</span></label
     >
-    <input
+    <div
       class="custom-input-field"
-      :type="inputType"
-      :name="label"
-      :id="label"
-      :placeholder="placeholder"
-      v-model="inputVal"
-      @input="validate"
-      @blur="validate"
-      :required="required"
-      :aria-required="required"
-    />
+      :style="{
+        borderRadius: rounded ? '50px' : '5px',
+        padding: rounded && type != 'search' ? '10px' : '',
+      }"
+    >
+      <span v-if="type === 'search'" class="icon-first">
+        <slot name="icon">icon</slot>
+      </span>
+      <input
+        class="regular-input"
+        :class="type == 'search' ? 'search-input' : ''"
+        :type="inputType"
+        :name="label"
+        :id="label"
+        :placeholder="placeholder"
+        v-model="inputVal"
+        @input="validate"
+        @blur="validate"
+        :required="required"
+        :aria-required="required"
+      />
+    </div>
     <p v-if="msg" aria-live="polite" class="error-msg">{{ msg }}</p>
   </div>
 </template>
@@ -29,12 +41,11 @@ const props = defineProps({
     type: String,
     required: true,
     validator(type) {
-      return ["username", "password", "email"].includes(type);
+      return ["username", "password", "email", "search"].includes(type);
     },
   },
   label: {
     type: String,
-    required: true,
   },
   placeholder: {
     type: String,
@@ -43,6 +54,9 @@ const props = defineProps({
     type: Boolean,
   },
   expand: {
+    type: Boolean,
+  },
+  rounded: {
     type: Boolean,
   },
 });
@@ -144,16 +158,41 @@ const validateEmail = (value) => {
   font-weight: 500;
 }
 .custom-input-field {
+  background: white;
   height: 40px;
   width: 100%;
-  min-width: 200px;
-  padding: 10px;
+  min-width: 250px;
   border-radius: 5px;
   border: 0.5px solid #d2d6db;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
 }
-.custom-input-field:focus {
+.custom-input-field .regular-input {
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  outline: 0;
+}
+
+.custom-input-field:focus-within {
   border: 2px solid #424242;
   outline: 0px;
+}
+.icon-first {
+  height: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.icon-first > * {
+  scale: 0.4;
+}
+.custom-input-field .search-input {
+  padding: 10px 10px 10px 0px;
 }
 .error-msg {
   font-size: 12px;
