@@ -1,25 +1,31 @@
 <template>
   <button
     class="custom-btn medium default"
-    :class="[type, size, edges, customClass, disabled ? 'disabled' : '']"
+    :class="[type, size, edges, ...[customClass], disabled ? 'disabled' : '']"
     :disabled="disabled"
     @click="$emit('click')"
   >
-    <slot name="icon-first" class="icon"></slot>
-    <slot></slot>
-    <slot name="icon-last"></slot>
+    <slot v-if="iconed === 'left'" name="icon" class="icon">
+      <RightArrowIcon />
+    </slot>
+    <slot>button</slot>
+    <slot v-if="iconed === 'right'" name="icon" class="icon">
+      <RightArrowIcon />
+    </slot>
   </button>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import RightArrowIcon from "../assets/icons/rightArrowIcon.vue";
 
 defineProps({
   type: String,
   size: String,
   edges: String,
-  customClass: String,
+  customClass: [String, Array],
   disabled: Boolean,
+  iconed: String,
 });
 // customClass will only work with style scoped classes because global fonts might cause a trouble with client code
 </script>
@@ -34,13 +40,15 @@ defineProps({
   line-height: 100%;
   border-radius: 5px;
   text-transform: capitalize;
-  border: 0px;
+  border: 1px;
   color: white;
   gap: 8px;
   align-items: center;
   justify-content: center;
   display: inline-flex;
   text-wrap: nowrap;
+  cursor: pointer;
+  transition: all 100ms;
 }
 .default {
   background-color: white;
@@ -63,7 +71,7 @@ defineProps({
   background-color: #0069d9;
 }
 .secondary {
-  background-color: #5a6268;
+  background-color: #2f2f31;
   border: 0px;
 }
 .danger {
@@ -86,7 +94,7 @@ defineProps({
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  font-weight: 500;;
+  font-weight: 500;
 }
 .small {
   /* padding: 8px 18px; */
@@ -108,13 +116,33 @@ defineProps({
   border-radius: 5px;
 }
 .icon {
-  font-size: 10px;
-  width: 10px;
   height: 100%;
+  aspect-ratio: 1;
 }
 .disabled {
   /* color: black; */
   opacity: 60%;
   cursor: not-allowed;
+}
+.success:hover {
+  background-color: #218838cc;
+}
+.primary:hover {
+  background-color: #0069d9cc;
+}
+.secondary:hover {
+  background-color: #2f2f31cc;
+}
+.danger:hover {
+  background-color: #c82333cc;
+}
+.warning:hover {
+  background-color: #e0a800cc;
+}
+.info:hover {
+  background-color: #138496cc;
+}
+.link:hover {
+  background-color: white;
 }
 </style>

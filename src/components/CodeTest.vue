@@ -1,6 +1,14 @@
 <template>
+  <KButton type="danger" @click="console.log('clicked')" iconed="right">
+  </KButton>
   <!-- <h1>Test</h1> -->
-  <KDataList :items="cities" @input="handleInput" iconed rounded label="Country"/>
+  <KDataList
+    :items="cities"
+    @input="handleInput"
+    iconed
+    rounded
+    label="Country"
+  />
 
   <KSearchInput
     placeholder="Seach employee by id"
@@ -244,6 +252,9 @@ const handleInput = (res) => {
 }
 .bg-red-300 {
   background-color: red;
+}
+.bg-black-300 {
+  background-color: #2f2f31;
 }
 .btns-container-table p {
   text-transform: capitalize;
