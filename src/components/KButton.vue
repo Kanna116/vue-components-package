@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 import RightArrowIcon from "../assets/icons/rightArrowIcon.vue";
 
 defineProps({
@@ -27,6 +27,7 @@ defineProps({
   disabled: Boolean,
   iconed: String,
 });
+defineEmits(["click"]);
 // customClass will only work with style scoped classes because global fonts might cause a trouble with client code
 </script>
 
@@ -62,8 +63,8 @@ defineProps({
 .success,
 .primary,
 .danger,
-.info
-,.link {
+.info,
+.link {
   color: white;
   border: 0px;
 }
@@ -121,7 +122,7 @@ defineProps({
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
-  border-radius: 6px
+  border-radius: 6px;
 }
 .large {
   padding: 12px 32px;

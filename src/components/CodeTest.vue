@@ -1,8 +1,8 @@
 <template>
-  <KSelect :items="cities" label="select option" @input="handleInput" />
-
+  <KToast />
   <!------------------------------------------------------------------------------- -->
   <!-- <h1>Test</h1> -->
+  <KSelect :items="cities" label="select option" @input="handleInput" />
   <KDataList
     :items="cities"
     @input="handleInput"
@@ -132,6 +132,7 @@ import KSearchInput from "./KSearchInput.vue";
 import FieldInput from "./FieldInput.vue";
 import KButton from "./KButton.vue";
 import KTable from "./KTable.vue";
+import KToast from "./KToast.vue";
 import KSelect from "./KSelect.vue";
 
 const columns = ["Order Id", "Customer Name", "Product Name"];
