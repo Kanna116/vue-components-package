@@ -1,4 +1,7 @@
 <template>
+  <KSelect :items="cities" label="select option" @input="handleInput" />
+
+  <!------------------------------------------------------------------------------- -->
   <!-- <h1>Test</h1> -->
   <KDataList
     :items="cities"
@@ -43,9 +46,11 @@
     <p>large</p>
 
     <p>sharp</p>
-    <KButton size="small" edges="sharp" @click="console.log('working')"
-      ></KButton
-    >
+    <KButton
+      size="small"
+      edges="sharp"
+      @click="console.log('working')"
+    ></KButton>
     <KButton edges="sharp" size="medium"></KButton>
     <KButton edges="sharp" size="large"></KButton>
 
@@ -89,8 +94,7 @@
         </svg>
       </template>
       First icon
-      </KButton
-    >
+    </KButton>
     <KButton type="outline" iconed="right">
       Last-icon
       <template #icon>
@@ -128,6 +132,8 @@ import KSearchInput from "./KSearchInput.vue";
 import FieldInput from "./FieldInput.vue";
 import KButton from "./KButton.vue";
 import KTable from "./KTable.vue";
+import KSelect from "./KSelect.vue";
+
 const columns = ["Order Id", "Customer Name", "Product Name"];
 
 import KDataList from "./KDataList.vue";
