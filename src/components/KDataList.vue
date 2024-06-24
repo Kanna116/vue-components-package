@@ -10,7 +10,7 @@
       :iconed="iconed"
       @input="handleSeach"
       v-model="inputVal"
-      :label='label'
+      :label="label"
     />
     <div v-if="searchedItems.length > 0" class="items-container">
       <p
@@ -52,7 +52,10 @@ const inputVal = ref("");
 const handleSeach = (res) => {
   inputVal.value = res;
   searchedItems.value = props.items.filter((item) =>
-    item.toLowerCase().includes(inputVal.value.toLowerCase())
+    item
+      .toString()
+      .toLowerCase()
+      .includes(inputVal.value.toString().toLowerCase())
   );
   emit("input", inputVal.value);
 };
@@ -72,6 +75,9 @@ const handleItemClick = (res) => {
   padding-bottom: 10px;
 }
 .data-list-container:hover .items-container {
+  display: block;
+}
+.data-list-container:focus-within .items-container{
   display: block;
 }
 .items-container {

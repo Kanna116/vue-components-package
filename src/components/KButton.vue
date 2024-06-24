@@ -8,7 +8,7 @@
     <slot v-if="iconed === 'left'" name="icon" class="icon">
       <RightArrowIcon />
     </slot>
-    <slot>button</slot>
+    <slot v-if="type != 'iconBtn'">button</slot>
     <slot v-if="iconed === 'right'" name="icon" class="icon">
       <RightArrowIcon />
     </slot>
@@ -51,16 +51,19 @@ defineProps({
   transition: all 100ms;
 }
 .default {
-  background-color: white;
-  color: black;
-  border: 1px solid #5a6268;
+  background-color: #18181b;
+  color: white;
+  border: 1px solid #e4e4e7;
+}
+.default:hover {
+  background-color: #18181be6;
 }
 
 .success,
 .primary,
 .danger,
-.secondary,
-.info {
+.info
+,.link {
   color: white;
   border: 0px;
 }
@@ -71,11 +74,12 @@ defineProps({
   background-color: #0069d9;
 }
 .secondary {
-  background-color: #2f2f31;
+  background-color: #f6f6f7;
   border: 0px;
+  color: #18181be6;
 }
 .danger {
-  background-color: #c82333;
+  background-color: #df3b3b;
 }
 .warning {
   background-color: #e0a800;
@@ -87,6 +91,21 @@ defineProps({
 .link {
   background-color: white;
   color: #0069d9;
+}
+.ghost {
+  background-color: transparent;
+  color: #18181b;
+  border: 0px;
+}
+.ghost:hover {
+  background-color: #f4f4f5;
+}
+.outline {
+  color: #18181b;
+  background-color: white;
+}
+.outline:hover {
+  background-color: #f4f4f5;
 }
 
 .medium {
@@ -101,6 +120,8 @@ defineProps({
   padding: 0.5rem 0.75rem;
   font-size: 0.75rem;
   line-height: 1rem;
+  font-weight: 500;
+  border-radius: 6px
 }
 .large {
   padding: 12px 32px;
@@ -120,29 +141,37 @@ defineProps({
   aspect-ratio: 1;
 }
 .disabled {
-  /* color: black; */
   opacity: 60%;
   cursor: not-allowed;
 }
 .success:hover {
-  background-color: #218838cc;
+  background-color: #218838dd;
 }
 .primary:hover {
-  background-color: #0069d9cc;
+  background-color: #0069d9dd;
 }
 .secondary:hover {
-  background-color: #2f2f31cc;
+  background-color: #18181b70;
 }
 .danger:hover {
-  background-color: #c82333cc;
+  background-color: #df3b3bdd;
 }
 .warning:hover {
-  background-color: #e0a800cc;
+  background-color: #e0a800dd;
 }
 .info:hover {
-  background-color: #138496cc;
+  background-color: #138496dd;
 }
 .link:hover {
   background-color: white;
+  text-decoration: underline;
+}
+.iconBtn {
+  color: #18181b;
+  background-color: white;
+  padding: 0.5rem;
+}
+.iconBtn:hover {
+  background-color: #f4f4f5;
 }
 </style>

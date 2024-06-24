@@ -7,7 +7,7 @@
     <div
       class="custom-input-field"
       :style="{
-        borderRadius: rounded ? '50px' : '5px',
+        borderRadius: rounded ? '100px' : '6px',
         padding: rounded && !iconed ? '10px' : '',
       }"
     >
@@ -190,7 +190,7 @@ watch(
   background: white;
   height: 40px;
   width: 100%;
-  min-width: 250px;
+  min-width: 20rem;
   border-radius: 5px;
   border: 0.5px solid #d2d6db;
   display: flex;

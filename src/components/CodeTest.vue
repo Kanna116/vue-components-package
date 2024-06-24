@@ -1,20 +1,25 @@
 <template>
-  <KButton type="danger" @click="console.log('clicked')" iconed="right">
-  </KButton>
   <!-- <h1>Test</h1> -->
   <KDataList
     :items="cities"
     @input="handleInput"
     iconed
-    rounded
+    :rounded="false"
     label="Country"
+  />
+  <KDataList
+    :items="numbers"
+    @input="handleInput"
+    iconed
+    rounded
+    label="Numbers"
   />
 
   <KSearchInput
     placeholder="Seach employee by id"
     label="Employee search"
     @input="handleSearch"
-    rounded
+    :rounded="false"
     iconed
     :expand="false"
   />
@@ -38,25 +43,21 @@
     <p>large</p>
 
     <p>sharp</p>
-    <KButton
-      customClass="bg-red-300"
-      size="small"
-      edges="sharp"
-      @click="console.log('working')"
-      >label</KButton
+    <KButton size="small" edges="sharp" @click="console.log('working')"
+      ></KButton
     >
-    <KButton edges="sharp" size="medium">label</KButton>
-    <KButton edges="sharp" size="large">label</KButton>
+    <KButton edges="sharp" size="medium"></KButton>
+    <KButton edges="sharp" size="large"></KButton>
 
     <p>normal</p>
-    <KButton size="small" edges="normal">label</KButton>
-    <KButton size="medium" edges="normal">label</KButton>
-    <KButton size="large" edges="normal">label</KButton>
+    <KButton size="small" edges="normal"></KButton>
+    <KButton size="medium" edges="normal"></KButton>
+    <KButton size="large" edges="normal"></KButton>
 
     <p>rounded</p>
-    <KButton size="small" edges="rounded">label</KButton>
-    <KButton size="medium" edges="rounded">label</KButton>
-    <KButton size="large" edges="rounded">label</KButton>
+    <KButton size="small" edges="rounded"></KButton>
+    <KButton size="medium" edges="rounded"></KButton>
+    <KButton size="large" edges="rounded"></KButton>
 
     <p>types</p>
     <KButton type="default">default</KButton>
@@ -67,46 +68,45 @@
     <KButton type="danger">danger</KButton>
     <KButton type="info">info</KButton>
     <p></p>
+    <KButton type="outline">Outline</KButton>
     <KButton type="link">link</KButton>
-    <p></p>
-    <p></p>
+    <KButton type="ghost">Ghost</KButton>
 
     <p>iconed</p>
-    <KButton type="primary">
-      <template #icon-first>
+    <KButton type="iconBtn" iconed="left"></KButton>
+
+    <KButton type="outline" iconed="left">
+      <template #icon>
         <svg
           width="12"
           height="12"
           viewBox="0 0 12 12"
-          fill="#ffffff"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M12 6.75H6.75V12H5.25V6.75H0V5.25H5.25V0H6.75V5.25H12V6.75Z"
-            fill="#ffffff"
           />
         </svg>
       </template>
-      Front-icon</KButton
+      First icon
+      </KButton
     >
-    <KButton type="primary">
+    <KButton type="outline" iconed="right">
       Last-icon
-      <template #icon-last>
+      <template #icon>
         <svg
           width="12"
           height="12"
           viewBox="0 0 12 12"
-          fill="#ffffff"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
             d="M12 6.75H6.75V12H5.25V6.75H0V5.25H5.25V0H6.75V5.25H12V6.75Z"
-            fill="#ffffff"
           />
         </svg>
       </template>
     </KButton>
-    <p></p>
+
     <p>Disabled</p>
     <KButton disabled> disabled </KButton>
   </div>
@@ -132,6 +132,7 @@ const columns = ["Order Id", "Customer Name", "Product Name"];
 
 import KDataList from "./KDataList.vue";
 const cities = ref(["India", "USA", "Africa", "Korea", "Japan"]);
+const numbers = ref([1, 2, 3, 4, 5, 6, 7, 8]);
 // const inputVal = ref('')
 
 const data = ref([
@@ -247,7 +248,7 @@ const handleInput = (res) => {
   align-items: center;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px 0px;
-  place-items: center;
+  /* place-items: center; */
   /* align-items: center; */
 }
 .bg-red-300 {
