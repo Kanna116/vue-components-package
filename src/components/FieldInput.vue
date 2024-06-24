@@ -1,6 +1,6 @@
 <!-- InputComponent.vue -->
 <template>
-  <div class="custom-input" :style="{ width: expand ? '100%' : '200px' }">
+  <div class="custom-input" :style="{ width: expand ? '100%' : 'fit-content' }">
     <label v-if="label" class="custom-label" :for="label">
       {{ label }} <span v-if="required">*</span>
     </label>
@@ -12,11 +12,16 @@
       }"
     >
       <span v-if="iconed" class="icon-first">
-        <slot name="icon">icon</slot>
+        <slot name="icon">
+          <PasswordIcon v-if="type === 'password'" />
+          <UserIcon v-if="type === 'username'" />
+          <MailIcon v-if="type === 'email'" />
+          <SearchIcon v-if="type === 'search'" />
+        </slot>
       </span>
       <input
         class="regular-input"
-        :class="type == 'search' && iconed ? 'search-input' : ''"
+        :class="iconed ? 'search-input' : ''"
         :type="inputType"
         :name="label"
         :id="label"
@@ -34,6 +39,10 @@
 
 <script setup>
 import { ref, computed, watch, defineProps, defineEmits } from "vue";
+import PasswordIcon from "../assets/icons/passwordIcon.vue";
+import UserIcon from "@/assets/icons/userIcon.vue";
+import MailIcon from "@/assets/icons/mailIcon.vue";
+import SearchIcon from "@/assets/icons/searchIcon.vue";
 
 const msg = ref("");
 const emit = defineEmits(["input"]);
@@ -65,8 +74,8 @@ const props = defineProps({
   },
   modelValue: {
     type: String,
-    default: ""
-  }
+    default: "",
+  },
 });
 
 const inputVal = ref(props.modelValue);
@@ -154,9 +163,12 @@ const validateEmail = (value) => {
   return "";
 };
 
-watch(() => props.modelValue, (newValue) => {
-  inputVal.value = newValue;
-});
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    inputVal.value = newValue;
+  }
+);
 </script>
 
 <style scoped>
@@ -206,7 +218,9 @@ watch(() => props.modelValue, (newValue) => {
   font-size: 12px;
 }
 .icon-first > * {
-  scale: 0.4;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 }
 .custom-input-field .search-input {
   padding: 10px 10px 10px 0px;

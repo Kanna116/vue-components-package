@@ -23,7 +23,7 @@ import CodeTest from "./components/CodeTest.vue";
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 100px;
+  gap: 30px;
   padding: 100px;
 }
 </style>

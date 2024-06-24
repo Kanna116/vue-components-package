@@ -1,7 +1,6 @@
 <template>
   <!-- <h1>Test</h1> -->
-  <KDataList :items="cities" @input="handleInput"/>
-  values is {{ inputVal }}
+  <KDataList :items="cities" @input="handleInput" iconed rounded label="Country"/>
 
   <KSearchInput
     placeholder="Seach employee by id"
@@ -12,15 +11,18 @@
     :expand="false"
   />
   <!-- {{ inputVal }} -->
+  <!-- fieldinput icon test -->
   <FieldInput
     type="username"
-    label="User Name"
-    placeholder="Please enter your user name"
     @input="handleInput"
-    required
+    label="Username"
     rounded
+    iconed
   />
+  <FieldInput type="password" label="Password" rounded iconed />
+  <FieldInput type="email" label="Email" rounded iconed />
 
+  values is {{ inputVal }}
   <div class="btns-container-table">
     <h1>Sizes and edges</h1>
     <p>small</p>

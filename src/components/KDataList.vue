@@ -1,13 +1,17 @@
 <template>
-  <div class="data-list-container">
+  <div
+    class="data-list-container"
+    :style="{ width: expand ? '100%' : 'fit-content' }"
+  >
     <KSearchInput
       list="items"
       expand
-      rounded
+      :rounded="rounded"
+      :iconed="iconed"
       @input="handleSeach"
       v-model="inputVal"
+      :label='label'
     />
-    <!-- {{inputVal}} -->
     <div v-if="searchedItems.length > 0" class="items-container">
       <p
         v-for="(item, index) in searchedItems"
@@ -27,6 +31,18 @@ const props = defineProps({
   items: {
     type: Array,
     required: true,
+  },
+  label: {
+    type: String,
+  },
+  iconed: {
+    type: Boolean,
+  },
+  expand: {
+    type: Boolean,
+  },
+  rounded: {
+    type: Boolean,
   },
 });
 const emit = defineEmits(["input"]);
@@ -49,7 +65,7 @@ const handleItemClick = (res) => {
 
 <style scoped>
 .data-list-container {
-  width: fit-content;
+  width: 100%;
   /* width: 500px; */
   height: fit-content;
   position: relative;
