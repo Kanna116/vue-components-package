@@ -1,6 +1,6 @@
 export const useDate = () => {
-  const date = new Date();
-  const getCurrentDate = date;
+  // const date = new Date();
+  const getCurrentDate = new Date();
 
   const weekdays = [
     "Sunday",
