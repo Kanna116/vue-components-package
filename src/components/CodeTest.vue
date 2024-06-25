@@ -1,5 +1,41 @@
 <template>
-  <KModalButton></KModalButton>
+  <KModalButton
+    title="Congratulations"
+    description="You are successfully a part of us now"
+    >Regular Modal</KModalButton
+  >
+  <KModalButton
+    type="confirmation"
+    title="Do you want to confirm your id?"
+    description="Are you sure these are your id details to move forward"
+    @isConfirmed="(res) => console.log(res)"
+    content-type="confirm"
+    >Confirmation Modal</KModalButton
+  >
+  <KModalButton
+    type="confirmation"
+    title="Content Suspicious"
+    description="Content seems to be not following guidelines do you want to continue"
+    @isConfirmed="(res) => console.log(res)"
+    content-type="warning"
+    >Warning Modal</KModalButton
+  >
+  <KModalButton
+    type="confirmation"
+    title="Are you sure you want to Unsubscribe?"
+    description="We are sorry to hear that you want to unsubscribe. We are going to miss you"
+    @isConfirmed="(res) => console.log(res)"
+    content-type="danger"
+    >Delete Modal</KModalButton
+  >
+  <KModalButton
+    type="confirmation"
+    title="Do want to continue with your current account?"
+    description="Can you confirm you want to move forward with this account"
+    @isConfirmed="(res) => console.log(res)"
+    content-type=""
+    >Default Confirmation Modal</KModalButton
+  >
   <!------------------------------------------------------------------------------- -->
   <!-- <h1>Test</h1> -->
   <KToast />

@@ -1,15 +1,28 @@
 <script setup>
+import { defineProps, defineEmits } from "vue";
 import KButton from "./KButton.vue";
+defineProps({
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+});
+const emit = defineEmits(["closeModal"]);
+const closeModal = () => {
+  emit("closeModal");
+};
 </script>
 
 <template>
   <div class="modal-container">
     <div class="modal">
-      <h1>Title</h1>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, in.</p>
+      <h1>{{ title }}</h1>
+      <p>{{ description }}</p>
       <div class="btn-container">
-        <slot name="btns">
-          <KButton type="outline" @click="$emit('closeModal')">Continue</KButton>
+        <slot name="modalBtns">
+          <KButton type="outline" @click="closeModal">Continue</KButton>
         </slot>
       </div>
     </div>
