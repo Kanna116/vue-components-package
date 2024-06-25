@@ -20,9 +20,9 @@ const removeToast = (id) => {
       <p class="toast-description">{{ formattedDate(toastItem.date) }}</p>
     </div>
     <div class="right">
-      <KButton type="default" @click="removeToast(toastItem.id)" size="small"
-        >Undo</KButton
-      >
+      <KButton type="default" @click="removeToast(toastItem.id)" size="small">
+        Undo
+      </KButton>
     </div>
   </li>
 </template>
@@ -38,6 +38,7 @@ const removeToast = (id) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .toast-item .left {
   display: flex;

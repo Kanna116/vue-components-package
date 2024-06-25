@@ -1,7 +1,8 @@
 <template>
-  <KToast />
+  <KModalButton></KModalButton>
   <!------------------------------------------------------------------------------- -->
   <!-- <h1>Test</h1> -->
+  <KToast />
   <KSelect :items="cities" label="select option" @input="handleInput" />
   <KDataList
     :items="cities"
@@ -134,6 +135,7 @@ import KButton from "./KButton.vue";
 import KTable from "./KTable.vue";
 import KToast from "./KToast.vue";
 import KSelect from "./KSelect.vue";
+import KModalButton from "./KModalButton.vue";
 
 const columns = ["Order Id", "Customer Name", "Product Name"];
 

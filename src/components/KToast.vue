@@ -1,11 +1,9 @@
 <script setup>
 import { ref, watch, computed } from "vue";
-import KToastItem from "./KToastItem.vue";
-// import { useDate } from "../composables/useDate";
 import { useNotification } from "../composables/useNotification";
+import KToastItem from "./KToastItem.vue";
 import KButton from "./KButton.vue";
 
-// const { formattedDate } = useDate();
 const { newNotification, allNotifications, removeNotification } =
   useNotification();
 const toasts = ref(allNotifications);
@@ -26,7 +24,7 @@ const displayToasts = computed(() => {
 
 <template>
   <KButton @click="handleClick" type="outline">Show Toast</KButton>
-  <ul class="toasts-container">
+  <ul v-if="displayToasts.length > 0" class="toasts-container">
     <KToastItem
       v-for="(toast, index) in displayToasts"
       :key="index"
