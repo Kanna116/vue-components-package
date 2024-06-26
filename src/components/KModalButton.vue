@@ -1,8 +1,8 @@
 <script setup>
-import { ref, defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, ref } from "vue";
 import KButton from "./KButton.vue";
-import KModal from "./KModal.vue";
 import KConfirmModal from "./KConfirmModal.vue";
+import KModal from "./KModal.vue";
 
 defineProps({
   type: {
@@ -17,6 +17,9 @@ defineProps({
   description: {
     type: String,
   },
+  toConfirm: {
+    type: Boolean,
+  },
 });
 
 const emit = defineEmits(["isConfirmed"]);
@@ -30,11 +33,13 @@ const closeModal = (isConfirmed) => {
 </script>
 
 <template>
-  <KButton @click="isModalOpen = true"><slot></slot></KButton>
+  <KButton :type="type" @click="isModalOpen = true">
+    <slot>{{ toConfirm ? 'Open Confirmaton':'Open Modal' }}</slot>
+  </KButton>
   <KModal
     :title="title"
     :description="description"
-    v-if="isModalOpen && type !== 'confirmation'"
+    v-if="isModalOpen && !toConfirm"
     @closeModal="closeModal"
   >
     <template #modalContinueBtn>
@@ -46,14 +51,14 @@ const closeModal = (isConfirmed) => {
     :type="type"
     :title="title"
     :description="description"
-    v-if="isModalOpen && type === 'confirmation'"
+    v-if="isModalOpen && toConfirm"
     @closeModal="closeModal"
   >
-  <template #cancelBtn>
-    <slot name="cancelBtn"></slot>
-  </template>
-  <template #acceptBtn>
-    <slot name="acceptBtn"></slot>
-  </template>
+    <template #cancelBtn>
+      <slot name="cancelBtn"></slot>
+    </template>
+    <template #acceptBtn>
+      <slot name="acceptBtn"></slot>
+    </template>
   </KConfirmModal>
 </template>
