@@ -1,4 +1,27 @@
 <template>
+  <KSheetTrigger>
+    <!-- you can write the button name here -->
+    <template #sheet-content>
+      <FieldInput
+        type="username"
+        @input="handleInput"
+        label="Username"
+        iconed
+      />
+      <br />
+      <FieldInput
+        type="password"
+        label="Password"
+        iconed
+        @input="handleInput"
+      />
+      <br />
+      <KButton>Log in</KButton>
+    </template>
+  </KSheetTrigger>
+
+  <!------------------------------------------------------------------------------- -->
+
   <div
     style="
       width: fit-content;
@@ -9,11 +32,10 @@
   >
     Default Modal
     <KModalButton
-    title="The title goes here"
-    description="The description will be displayed here"
-    > 
-
-  </KModalButton>
+      title="The title goes here"
+      description="The description will be displayed here"
+    >
+    </KModalButton>
     Default Confirmation
     <KModalButton
       toConfirm
@@ -62,7 +84,6 @@
       <template #acceptBtn>Unsubscribe</template>
     </KModalButton>
   </div>
-  <!------------------------------------------------------------------------------- -->
   <!-- <h1>Test</h1> -->
   <KToast />
   <KSelect :items="cities" label="select option" @input="handleInput" />
@@ -198,6 +219,7 @@ import KSearchInput from "./KSearchInput.vue";
 import KSelect from "./KSelect.vue";
 import KTable from "./KTable.vue";
 import KToast from "./KToast.vue";
+import KSheetTrigger from "./KSheetTrigger.vue";
 
 const columns = ["Order Id", "Customer Name", "Product Name"];
 
