@@ -39,8 +39,9 @@ const removeToast = (id) => {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  transition: all 400ms ease;
+  /* transition: all 400ms ease; */
   animation: animateToast 500ms ease 0s forwards;
+  animation: animateToastLeave 500ms ease 4.5s forwards;
 }
 .toast-item .left {
   display: flex;
@@ -60,12 +61,20 @@ const removeToast = (id) => {
 }
 @keyframes animateToast {
   0% {
-    /* transform: scale(0.9) */
     transform: translateY(50px);
   }
   100% {
-    /* transform: scale(1) */
     transform: translateY(0px);
+  }
+}
+@keyframes animateToastLeave {
+  0% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50px);
+    opacity: 0;
   }
 }
 </style>

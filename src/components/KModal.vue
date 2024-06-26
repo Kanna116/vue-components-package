@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps, defineEmits } from "vue";
 import KButton from "./KButton.vue";
+import KCloseButton from "./KCloseButton.vue";
 defineProps({
   title: {
     type: String,
@@ -18,6 +19,7 @@ const closeModal = () => {
 <template>
   <div class="modal-container">
     <div class="modal">
+      <KCloseButton @click="closeModal" />
       <h1>{{ title }}</h1>
       <p>{{ description }}</p>
       <div class="btn-container">

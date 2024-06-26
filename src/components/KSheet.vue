@@ -1,7 +1,6 @@
 <script setup>
-import CloseIcon from "@/assets/icons/closeIcon.vue";
 import { defineEmits } from "vue";
-import KButton from "./KButton.vue";
+import KCloseButton from "./KCloseButton.vue";
 
 const emit = defineEmits(["closeSheet"]);
 const handleClose = () => {
@@ -12,17 +11,7 @@ const handleClose = () => {
 <template>
   <div class="sheet-container">
     <div class="sheet-item">
-      <KButton
-      size="large"
-        type="iconBtn"
-        @click="handleClose"
-        customClass="sheet-close-btn"
-        iconed="left"
-      >
-        <template #icon>
-          <CloseIcon />
-        </template>
-      </KButton>
+      <KCloseButton @click="handleClose" />
       <slot name="sheet-content">Enter your sheet content inside </slot>
     </div>
   </div>
@@ -50,12 +39,6 @@ const handleClose = () => {
   right: 0px;
   padding: 3rem 1.5rem;
   animation: animateSheet 500ms ease 0s forwards;
-}
-.sheet-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 30px;
-  border: 0px;
 }
 
 @keyframes animateSheet {

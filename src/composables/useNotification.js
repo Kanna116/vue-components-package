@@ -14,7 +14,7 @@ export const useNotification = () => {
             date: getCurrentDate
         })
         if (allNotifications.value.length !== 0) {
-            setTimeout(() => allNotifications.value.shift(), 10000)
+            setTimeout(() => allNotifications.value.shift(), 5000)
         }
 
         // console.log(allNotifications.value)
