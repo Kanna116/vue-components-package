@@ -1,8 +1,8 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, watch } from "vue";
 import { useNotification } from "../composables/useNotification";
-import KToastItem from "./KToastItem.vue";
 import KButton from "./KButton.vue";
+import KToastItem from "./KToastItem.vue";
 
 const { newNotification, allNotifications, removeNotification } =
   useNotification();
@@ -13,20 +13,13 @@ const handleClick = () => {
 watch(allNotifications, (newVal) => {
   toasts.value = newVal;
 });
-
-const displayToasts = computed(() => {
-  if (toasts.value.length > 4) return toasts.value.slice(-4);
-  else {
-    return toasts.value;
-  }
-});
 </script>
 
 <template>
   <KButton @click="handleClick" type="outline">Show Toast</KButton>
-  <ul v-if="displayToasts.length > 0" class="toasts-container">
+  <ul v-if="toasts.length > 0" class="toasts-container">
     <KToastItem
-      v-for="(toast, index) in displayToasts"
+      v-for="(toast, index) in toasts"
       :key="index"
       :toastItem="toast"
       @remove="removeNotification"
