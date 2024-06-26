@@ -43,13 +43,14 @@ const closeModal = () => {
   top: 0;
   left: 0;
   z-index: 1000;
+  animation: animateModalBackground 200ms ease 0s forwards;
 }
 .modal {
   width: 30vw;
   height: fit-content;
   min-height: 100px;
   background-color: #fff;
-  box-shadow: 0px 0px 10px #00000070;
+  box-shadow: 0px 0px 10px #000000aa;
   padding: 20px;
   border-radius: 0.5rem;
   display: flex;
@@ -57,6 +58,8 @@ const closeModal = () => {
   justify-content: flex-start;
   flex-direction: column;
   gap: 1rem;
+  transition: all 300ms ease;
+  animation: animateModal 200ms ease 0s forwards;
 }
 .modal h1 {
   font-size: 1.125rem;
@@ -76,5 +79,24 @@ const closeModal = () => {
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
+}
+
+@keyframes animateModal {
+  0% {
+    transform: scale(0.9)
+    /* transform: translateY(50px); */
+  }
+  100% {
+    transform: scale(1)
+    /* transform: translateY(0px); */
+  }
+}
+@keyframes animateModalBackground {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #000000aa;
+  }
 }
 </style>

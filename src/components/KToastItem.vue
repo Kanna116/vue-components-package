@@ -39,6 +39,8 @@ const removeToast = (id) => {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  transition: all 400ms ease;
+  animation: animateToast 500ms ease 0s forwards;
 }
 .toast-item .left {
   display: flex;
@@ -55,5 +57,15 @@ const removeToast = (id) => {
   font-size: 12px;
   font-weight: 400;
   color: #000000;
+}
+@keyframes animateToast {
+  0% {
+    /* transform: scale(0.9) */
+    transform: translateY(50px);
+  }
+  100% {
+    /* transform: scale(1) */
+    transform: translateY(0px);
+  }
 }
 </style>
