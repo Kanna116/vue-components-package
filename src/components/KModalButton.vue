@@ -30,13 +30,17 @@ const closeModal = (isConfirmed) => {
 </script>
 
 <template>
-  <KButton @click="isModalOpen = true"><slot /></KButton>
+  <KButton @click="isModalOpen = true"><slot></slot></KButton>
   <KModal
     :title="title"
     :description="description"
     v-if="isModalOpen && type !== 'confirmation'"
     @closeModal="closeModal"
-  ></KModal>
+  >
+    <template #modalContinueBtn>
+      <slot name="modalContinueBtn"></slot>
+    </template>
+  </KModal>
   <KConfirmModal
     :contentType="contentType"
     :type="type"
@@ -44,5 +48,12 @@ const closeModal = (isConfirmed) => {
     :description="description"
     v-if="isModalOpen && type === 'confirmation'"
     @closeModal="closeModal"
-  ></KConfirmModal>
+  >
+  <template #cancelBtn>
+    <slot name="cancelBtn"></slot>
+  </template>
+  <template #acceptBtn>
+    <slot name="acceptBtn"></slot>
+  </template>
+  </KConfirmModal>
 </template>

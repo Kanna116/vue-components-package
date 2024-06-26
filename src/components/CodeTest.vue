@@ -2,32 +2,34 @@
   <KModalButton
     title="Congratulations"
     description="You are successfully a part of us now"
-    >Regular Modal</KModalButton
-  >
+    >Regular Modal
+    <template #modalContinueBtn> Thanks </template>
+  </KModalButton>
   <KModalButton
     type="confirmation"
     title="Do you want to confirm your id?"
     description="Are you sure these are your id details to move forward"
     @isConfirmed="(res) => console.log(res)"
     content-type="confirm"
-    >Confirmation Modal</KModalButton
-  >
+    >Confirmation Modal
+  </KModalButton>
   <KModalButton
     type="confirmation"
     title="Content Suspicious"
     description="Content seems to be not following guidelines do you want to continue"
     @isConfirmed="(res) => console.log(res)"
     content-type="warning"
-    >Warning Modal</KModalButton
-  >
+    >Warning Modal
+  </KModalButton>
   <KModalButton
     type="confirmation"
     title="Are you sure you want to Unsubscribe?"
     description="We are sorry to hear that you want to unsubscribe. We are going to miss you"
     @isConfirmed="(res) => console.log(res)"
     content-type="danger"
-    >Delete Modal</KModalButton
-  >
+    >Delete Modal
+    <template #acceptBtn>Unsubscribe</template>
+  </KModalButton>
   <KModalButton
     type="confirmation"
     title="Do want to continue with your current account?"
@@ -165,13 +167,13 @@
 
 <script setup>
 import { ref } from "vue";
-import KSearchInput from "./KSearchInput.vue";
 import FieldInput from "./FieldInput.vue";
 import KButton from "./KButton.vue";
+import KModalButton from "./KModalButton.vue";
+import KSearchInput from "./KSearchInput.vue";
+import KSelect from "./KSelect.vue";
 import KTable from "./KTable.vue";
 import KToast from "./KToast.vue";
-import KSelect from "./KSelect.vue";
-import KModalButton from "./KModalButton.vue";
 
 const columns = ["Order Id", "Customer Name", "Product Name"];
 

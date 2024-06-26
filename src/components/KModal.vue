@@ -22,7 +22,9 @@ const closeModal = () => {
       <p>{{ description }}</p>
       <div class="btn-container">
         <slot name="modalBtns">
-          <KButton type="outline" @click="closeModal">Continue</KButton>
+          <KButton type="outline" @click="closeModal">
+            <slot name="modalContinueBtn">Continue</slot>
+          </KButton>
         </slot>
       </div>
     </div>

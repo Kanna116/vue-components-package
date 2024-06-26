@@ -43,11 +43,14 @@ const btnVariant = computed(() => {
   <KModal :title="title" :description="description">
     <template #modalBtns>
       <KButton type="outline" @click="$emit('closeModal', false)"
-        >Cancel</KButton
-      >
-      <KButton :type="btnVariant.btnType" @click="$emit('closeModal', true)">{{
-        btnVariant.label
-      }}</KButton>
+        >
+        <slot name="cancelBtn">Cancel</slot>
+        </KButton
+        >
+        <KButton :type="btnVariant.btnType" @click="$emit('closeModal', true)">
+        <slot name="acceptBtn">{{btnVariant.label}}</slot>
+
+      </KButton>
     </template>
   </KModal>
 </template>
